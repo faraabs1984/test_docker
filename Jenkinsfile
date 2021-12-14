@@ -5,7 +5,7 @@ pipeline {
       stage('checkout') {
            steps {
              
-                git branch: 'master', url: 'https://github.com/faraabs1984/CI-CD-using-Docker.git'
+                git branch: 'master', url: 'https://github.com/faraabs1984/test_docker.git'
              
           }
         }
@@ -15,8 +15,8 @@ pipeline {
   stage('Docker Build and Tag') {
            steps {
               
-                sh 'docker build -t samplewebapp:latest .' 
-                sh 'docker tag samplewebapp faraabs/samplewebapp:latest'
+                sh 'docker build -t test_docker:latest .' 
+                sh 'docker tag test_docker faraabs/test_docker:latest'
                 //sh 'docker tag samplewebapp nikhilnidhi/samplewebapp:$BUILD_NUMBER'
                
           }
@@ -26,7 +26,7 @@ pipeline {
           
             steps {
         withDockerRegistry([ credentialsId: "dockerHub", url: "" ]) {
-          sh  'docker push faraabs/samplewebapp:latest'
+          sh  'docker push faraabs/test_docker:latest'
         //  sh  'docker push nikhilnidhi/samplewebapp:$BUILD_NUMBER' 
         }
                   
@@ -37,7 +37,7 @@ pipeline {
              
             steps 
 			{
-                sh "docker run -d -p 8003:8080 faraabs/samplewebapp"
+                sh "docker run -d -p 8003:8080 faraabs/test_docker"
  
             }
         }
