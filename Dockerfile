@@ -1,4 +1,4 @@
-FROM amazonlinux
+FROM alpine
 
 RUN yum -y update
 RUN yum -y install httpd
